@@ -9,7 +9,7 @@ module.exports = function(app) {
  app.get('/api/data', function(req, res) {
   // use mongoose to get all nerds in the database
   //alert('check1');
-  Subjects.find({"business_id":"4P-vTvE6cncJyUyLh73pxw"},function(err, subjectDetails) {
+  Subjects.find({"business_id":"xkVMIk_Vqh17f48ZQ_6b0w"},function(err, subjectDetails) {
    // if there is an error retrieving, send the error. 
        // nothing after res.send(err) will execute
    if (err) 
@@ -17,6 +17,16 @@ module.exports = function(app) {
     res.json(subjectDetails); // return all nerds in JSON format
   });
   //res.send('check');
+ });
+ app.get('/api/data1',function(req,res)
+ {
+Subjects.find({"business_id":"uuGlYAIvYAX1q1KhpY6dtA"},function(err, subjectDetails) {
+   // if there is an error retrieving, send the error. 
+       // nothing after res.send(err) will execute
+   if (err) 
+   res.send(err);
+    res.json(subjectDetails); // return all nerds in JSON format
+  });
  });
 
  
