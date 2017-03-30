@@ -60,14 +60,14 @@ var dateFormat = d3.time.format("%Y-%m-%d");
 
 	//Define Dimensions
 	var datePosted = ndx.dimension(function(d) { return d.date; });
-	var gradeLevel = ndx.dimension(function(d) { return d.grade_level; });
-	var resourceType = ndx.dimension(function(d) { return d.resource_type; });
+	// var gradeLevel = ndx.dimension(function(d) { return d.grade_level; });
+	// var resourceType = ndx.dimension(function(d) { return d.resource_type; });
 	//var donutStatus = ndx.dimension(function(d) { return d.useful; });
-	var funny=ndx.dimension(function(d){return d.funny;});
-	var cool=ndx.dimension(function(d){return d.cool;})
-	var povertyLevel = ndx.dimension(function(d) { return d.date.getMonth(); });
+	// var funny=ndx.dimension(function(d){return d.funny;});
+	// var cool=ndx.dimension(function(d){return d.cool;})
+	// var povertyLevel = ndx.dimension(function(d) { return d.date.getMonth(); });
 	var review = ndx.dimension(function(d) { return d.stars; });
-	var totalDonations  = ndx.dimension(function(d) { return d.total_donations; });
+	// var totalDonations  = ndx.dimension(function(d) { return d.total_donations; });
 
 	//var date=ndx1.dimension(function(d){ return d.date;});
 
@@ -76,10 +76,10 @@ var dateFormat = d3.time.format("%Y-%m-%d");
 	//Calculate metrics
 	var projectsByDate = datePosted.group(); 
 	//var projectsdate= date.group();
-	var projectsByGrade = gradeLevel.group(); 
-	var projectsByResourceType = resourceType.group();
+	// var projectsByGrade = gradeLevel.group(); 
+	//var projectsByResourceType = resourceType.group();
 	//var projectsByDonutStatus = donutStatus.group();
-	var projectsByPovertyLevel = povertyLevel.group();
+	//var projectsByPovertyLevel = povertyLevel.group();
 	var reviewGroup = review.group();
 
 	var all = ndx.groupAll();
@@ -90,23 +90,23 @@ var dateFormat = d3.time.format("%Y-%m-%d");
 		return d.stars;
 	});
 
-	var totalDonationsGrade = gradeLevel.group().reduceSum(function(d) {
-		return d.grade_level;
-	});
+	// var totalDonationsGrade = gradeLevel.group().reduceSum(function(d) {
+	// 	return d.grade_level;
+	// });
 
 	// var totalDonationsDonutStatus = donutStatus.group().reduceSum(function(d) {
 	// 	return d.useful;
 	// });
-	var totalfunny=funny.group().reduceSum(function(d){
-		return d.funny;
-	});
-	var totalcool=funny.group().reduceSum(function(d){
-		return d.cool;
-	});
+	// var totalfunny=funny.group().reduceSum(function(d){
+	// 	return d.funny;
+	// });
+	// var totalcool=funny.group().reduceSum(function(d){
+	// 	return d.cool;
+	// });
 
 
 
-	var netTotalDonations = ndx.groupAll().reduceSum(function(d) {return d.total_donations;});
+	// var netTotalDonations = ndx.groupAll().reduceSum(function(d) {return d.total_donations;});
 
 	//Define threshold values for data
 	// var minDate = datePosted.bottom(1).date;
@@ -124,34 +124,34 @@ console.log(maxDate);
     //Charts
 	var dateChart1 = dc.lineChart(compositeDateChart);
 	// var dateChart1 = dc.lineChart("#date-chart1");
-	var gradeLevelChart = dc.rowChart("#grade-chart");
-	var resourceTypeChart = dc.rowChart("#resource-chart");
-	//var donutStatusChart1 = dc.pieChart(compositeDonutChart);
-	var povertyLevelChart = dc.rowChart("#poverty-chart");
-	var totalProjects = dc.numberDisplay("#total-projects");
-	var netDonations = dc.numberDisplay("#net-donations");
+	// var gradeLevelChart = dc.rowChart("#grade-chart");
+	// var resourceTypeChart = dc.rowChart("#resource-chart");
+	// //var donutStatusChart1 = dc.pieChart(compositeDonutChart);
+	// var povertyLevelChart = dc.rowChart("#poverty-chart");
+	// var totalProjects = dc.numberDisplay("#total-projects");
+	// var netDonations = dc.numberDisplay("#net-donations");
 	var reviewDistribution1 = dc.barChart(compositeReviewChart);
 
 
-  selectField = dc.selectMenu('#menuselect')
-        .dimension(review)
-        .group(reviewGroup); 
+ //  selectField = dc.selectMenu('#menuselect')
+ //        .dimension(review)
+ //        .group(reviewGroup); 
 
-       dc.dataCount("#row-selection")
-        .dimension(ndx)
-        .group(all);
+ //       dc.dataCount("#row-selection")
+ //        .dimension(ndx)
+ //        .group(all);
 
 
-	totalProjects
-		.formatNumber(d3.format("d"))
-		.valueAccessor(function(d){return d; })
-		.group(all);
+	// totalProjects
+	// 	.formatNumber(d3.format("d"))
+	// 	.valueAccessor(function(d){return d; })
+	// 	.group(all);
 
-	netDonations
-		.formatNumber(d3.format("d"))
-		.valueAccessor(function(d){return d; })
-		.group(netTotalDonations)
-		.formatNumber(d3.format(".3s"));
+	// netDonations
+	// 	.formatNumber(d3.format("d"))
+	// 	.valueAccessor(function(d){return d; })
+	// 	.group(netTotalDonations)
+	// 	.formatNumber(d3.format(".3s"));
 
 	dateChart1
 		//.width(600)
@@ -183,27 +183,27 @@ console.log(maxDate);
 		// .xAxisLabel("Year")
 		// .yAxis().ticks(6);
 
-	resourceTypeChart
-        //.width(300)
-        .height(220)
-        .dimension(resourceType)
-        .group(projectsByResourceType)
-        .elasticX(true)
-        .xAxis().ticks(5);
+	// resourceTypeChart
+ //        //.width(300)
+ //        .height(220)
+ //        .dimension(resourceType)
+ //        .group(projectsByResourceType)
+ //        .elasticX(true)
+ //        .xAxis().ticks(5);
 
-	povertyLevelChart
-		//.width(300)
-		.height(220)
-        .dimension(povertyLevel)
-        .group(projectsByPovertyLevel)
-        .xAxis().ticks(4);
+	// povertyLevelChart
+	// 	//.width(300)
+	// 	.height(220)
+ //        .dimension(povertyLevel)
+ //        .group(projectsByPovertyLevel)
+ //        .xAxis().ticks(4);
 
-	gradeLevelChart
-		//.width(300)
-		.height(220)
-        .dimension(gradeLevel)
-        .group(projectsByGrade)
-        .xAxis().ticks(4);
+	// gradeLevelChart
+	// 	//.width(300)
+	// 	.height(220)
+ //        .dimension(gradeLevel)
+ //        .group(projectsByGrade)
+ //        .xAxis().ticks(4);
 
   
     // donutStatusChart1
@@ -219,38 +219,39 @@ console.log(maxDate);
 
 
     reviewDistribution1
-    	//.width(800)
-        //.height(220)
-        //.transitionDuration(1000)
+    	.width(500)
+        .height(220)
+        .transitionDuration(1000)
         .dimension(review)
         .group(totalDonationsState)
-        //.margins({top: 10, right: 50, bottom: 30, left: 50})
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
         .centerBar(true)
-        //.gap(5)
-        //.elasticY(true)
-        //.x(d3.scale.ordinal().domain(review))
-        // .xUnits(dc.units.ordinal)
-        // .renderHorizontalGridLines(true)
-        // .renderVerticalGridLines(true)
-        // .ordering(function(d){return d.value;})
-        // .yAxis().tickFormat(d3.format("s"));
+        .colors('blue')
+        .gap(5)
+        .elasticY(true)
+        .x(d3.scale.ordinal().domain(review))
+        .xUnits(dc.units.ordinal)
+        .renderHorizontalGridLines(true)
+        .renderVerticalGridLines(true)
+      .ordering(function(d){return d.stars;})
+       .yAxis().tickFormat(d3.format("s"));
 
 
  ///copy 22222222222
  	//ndx.remove()
  	//ndx.add(dataset1);
-    var ndx = crossfilter(dataset1);
+    var ndx1 = crossfilter(dataset1);
  //Define Dimensions
-	var datePosted = ndx.dimension(function(d) { return d.date; });
+	var datePosted = ndx1.dimension(function(d) { return d.date; });
 
-	var gradeLevel = ndx.dimension(function(d) { return d.grade_level; });
-	var resourceType = ndx.dimension(function(d) { return d.resource_type; });
+	// var gradeLevel = ndx1.dimension(function(d) { return d.grade_level; });
+	// var resourceType = ndx1.dimension(function(d) { return d.resource_type; });
 	//var donutStatus = ndx.dimension(function(d) { return d.useful; });
-	var funny=ndx.dimension(function(d){return d.funny;});
-	var cool=ndx.dimension(function(d){return d.cool;})
-	var povertyLevel = ndx.dimension(function(d) { return d.date.getMonth(); });
-	var review= ndx.dimension(function(d) { return d.stars; });
-	var totalDonations  = ndx.dimension(function(d) { return d.total_donations; });
+	// var funny=ndx1.dimension(function(d){return d.funny;});
+	// var cool=ndx1.dimension(function(d){return d.cool;})
+	// var povertyLevel = ndx1.dimension(function(d) { return d.date.getMonth(); });
+	var review= ndx1.dimension(function(d) { return d.stars; });
+	// var totalDonations  = ndx1.dimension(function(d) { return d.total_donations; });
 
 	//var date=ndx1.dimension(function(d){ return d.date;});
 
@@ -259,13 +260,13 @@ console.log(maxDate);
 	//Calculate metrics
 	projectsByDate = datePosted.group(); 
 	//var projectsdate= date.group();
-	var projectsByGrade = gradeLevel.group(); 
-	var projectsByResourceType = resourceType.group();
-	//var projectsByDonutStatus = donutStatus.group();
-	var projectsByPovertyLevel = povertyLevel.group();
+	// var projectsByGrade = gradeLevel.group(); 
+	// var projectsByResourceType = resourceType.group();
+	// //var projectsByDonutStatus = donutStatus.group();
+	// var projectsByPovertyLevel = povertyLevel.group();
 	var reviewGroup = review.group();
 
-	var all = ndx.groupAll();
+	var all = ndx1.groupAll();
 	//var all1 = ndx1.groupAll();
 
 	//Calculate Groups
@@ -273,23 +274,23 @@ console.log(maxDate);
 		return d.stars;
 	});
 
-	var totalDonationsGrade = gradeLevel.group().reduceSum(function(d) {
-		return d.grade_level;
-	});
+	// var totalDonationsGrade = gradeLevel.group().reduceSum(function(d) {
+	// 	return d.grade_level;
+	// });
 
 	// var totalDonationsFundingStatus = donutStatus.group().reduceSum(function(d) {
 	// 	return d.useful;
+	// // });
+	// var totalfunny=funny.group().reduceSum(function(d){
+	// 	return d.funny;
 	// });
-	var totalfunny=funny.group().reduceSum(function(d){
-		return d.funny;
-	});
-	var totalcool=funny.group().reduceSum(function(d){
-		return d.cool;
-	});
+	// var totalcool=funny.group().reduceSum(function(d){
+	// 	return d.cool;
+	// });
 
 
 
-	var netTotalDonations = ndx.groupAll().reduceSum(function(d) {return d.total_donations;});
+	// var netTotalDonations = ndx1.groupAll().reduceSum(function(d) {return d.total_donations;});
 
 	//Define threshold values for data
 	// var minDate = datePosted.bottom(1).date;
@@ -306,34 +307,34 @@ console.log(maxDate);
 
 	var dateChart2 = dc.lineChart(compositeDateChart);
 	// var dateChart1 = dc.lineChart("#date-chart1");
-	var gradeLevelChart = dc.rowChart("#grade-chart");
-	var resourceTypeChart = dc.rowChart("#resource-chart");
+	// var gradeLevelChart = dc.rowChart("#grade-chart");
+	// var resourceTypeChart = dc.rowChart("#resource-chart");
 	//var donutStatusChart2 = dc.pieChart(compositeDonutChart);
-	var povertyLevelChart = dc.rowChart("#poverty-chart");
-	var totalProjects = dc.numberDisplay("#total-projects");
-	var netDonations = dc.numberDisplay("#net-donations");
+	// var povertyLevelChart = dc.rowChart("#poverty-chart");
+	// var totalProjects = dc.numberDisplay("#total-projects");
+	// var netDonations = dc.numberDisplay("#net-donations");
 	var reviewDistribution2 = dc.barChart(compositeReviewChart);
 
 
-  selectField = dc.selectMenu('#menuselect')
-        .dimension(review)
-        .group(reviewGroup); 
+ //  selectField = dc.selectMenu('#menuselect')
+ //        .dimension(review)
+ //        .group(reviewGroup); 
 
-       dc.dataCount("#row-selection")
-        .dimension(ndx)
-        .group(all);
+ //       dc.dataCount("#row-selection")
+ //        .dimension(ndx)
+ //        .group(all);
 
 
-	totalProjects
-		.formatNumber(d3.format("d"))
-		.valueAccessor(function(d){return d; })
-		.group(all);
+	// totalProjects
+	// 	.formatNumber(d3.format("d"))
+	// 	.valueAccessor(function(d){return d; })
+	// 	.group(all);
 
-	netDonations
-		.formatNumber(d3.format("d"))
-		.valueAccessor(function(d){return d; })
-		.group(netTotalDonations)
-		.formatNumber(d3.format(".3s"));
+	// netDonations
+	// 	.formatNumber(d3.format("d"))
+	// 	.valueAccessor(function(d){return d; })
+	// 	.group(netTotalDonations)
+	// 	.formatNumber(d3.format(".3s"));
 
 	dateChart2
 		//.width(600)
@@ -375,27 +376,27 @@ compositeDateChart
     
 
 
-	resourceTypeChart
-        //.width(300)
-        .height(220)
-        .dimension(resourceType)
-        .group(projectsByResourceType)
-        .elasticX(true)
-        .xAxis().ticks(5);
+	// resourceTypeChart
+ //        //.width(300)
+ //        .height(220)
+ //        .dimension(resourceType)
+ //        .group(projectsByResourceType)
+ //        .elasticX(true)
+ //        .xAxis().ticks(5);
 
-	povertyLevelChart
-		//.width(300)
-		.height(220)
-        .dimension(povertyLevel)
-        .group(projectsByPovertyLevel)
-        .xAxis().ticks(4);
+	// povertyLevelChart
+	// 	//.width(300)
+	// 	.height(220)
+ //        .dimension(povertyLevel)
+ //        .group(projectsByPovertyLevel)
+ //        .xAxis().ticks(4);
 
-	gradeLevelChart
-		//.width(300)
-		.height(220)
-        .dimension(gradeLevel)
-        .group(projectsByGrade)
-        .xAxis().ticks(4);
+	// gradeLevelChart
+	// 	//.width(300)
+	// 	.height(220)
+ //        .dimension(gradeLevel)
+ //        .group(projectsByGrade)
+ //        .xAxis().ticks(4);
 
   
           // donutStatusChart2
@@ -416,26 +417,25 @@ compositeDateChart
 //     ]);
 
     reviewDistribution2
-    	//.width(800)
-        //.height(220)
-        //.transitionDuration(1000)
+    	.width(500)
+        .height(220)
+        .transitionDuration(1000)
         .dimension(review)
         .group(totalDonationsState)
-       // .colors('red')
-        //.margins({top: 10, right: 50, bottom: 30, left: 50})
+        .margins({top: 10, right: 50, bottom: 30, left: 50})
         .centerBar(true)
-        //.gap(5)
-        //.elasticY(true)
-        //.x(d3.scale.ordinal().domain(review))
-        //.xUnits(dc.units.ordinal)
-        //.renderHorizontalGridLines(true)
-        //.renderVerticalGridLines(true)
-        //.ordering(function(d){return d.value;})
-        //.yAxis().tickFormat(d3.format("s"));
+        .colors('red')
+        .gap(5)
+        .elasticY(true)
+        .x(d3.scale.ordinal().domain(review))
+        .xUnits(dc.units.ordinal)
+        .renderHorizontalGridLines(true)
+        .renderVerticalGridLines(true)
+      .ordering(function(d){return d.stars;})
+       .yAxis().tickFormat(d3.format("s"));
 
     compositeReviewChart
     //.width(400)
-    .height(220)
     
     .x(d3.scale.ordinal().domain(review))
     .compose([reviewDistribution1,
